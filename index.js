@@ -32,6 +32,13 @@ async function run() {
     const listingsCollection = db.collection('listings');
     const ordersCollection = db.collection('orders');
 
+    // GET all listings
+    app.get('/listings', async (req, res) => {
+      const result = await listingsCollection.find().toArray();
+      res.send(result);
+    });
+
+
 
 
 
