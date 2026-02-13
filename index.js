@@ -72,6 +72,30 @@ async function run() {
       res.send(result);
     });
 
+    // GET my listings
+    app.get('/my-listings', async (req, res) => {
+      const email = req.query.email;
+
+      const result = await listingsCollection
+        .find({ email: email })
+        .toArray();
+
+      res.send(result);
+    });
+
+    // SEARCH by name
+    app.get('/search', async (req, res) => {
+      const searchText = req.query.text;
+
+      const result = await listingsCollection
+        .find({
+          name: { $regex: searchText, $options: "i" }
+        })
+        .toArray();
+
+      res.send(result);
+    });
+
 
 
 
