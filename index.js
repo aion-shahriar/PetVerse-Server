@@ -32,11 +32,24 @@ async function run() {
     const listingsCollection = db.collection('listings');
     const ordersCollection = db.collection('orders');
 
+
+    // listings routes
+
     // GET all listings
     app.get('/listings', async (req, res) => {
       const result = await listingsCollection.find().toArray();
       res.send(result);
     });
+
+    // GET single listing
+    app.get('/listings/:id', async (req, res) => {
+      const { id } = req.params;
+      const result = await listingsCollection.findOne({
+        _id: new ObjectId(id)
+      });
+      res.send(result);
+    });
+
 
 
 
