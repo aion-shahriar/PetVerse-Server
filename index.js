@@ -130,6 +130,28 @@ async function run() {
       res.send(result);
     });
 
+    // orders routes
+
+     // ADD order
+    app.post('/orders', async (req, res) => {
+      const data = req.body;
+      data.createdAt = new Date();
+
+      const result = await ordersCollection.insertOne(data);
+      res.send(result);
+    });
+
+    // GET my orders
+    app.get('/my-orders', async (req, res) => {
+      const email = req.query.email;
+
+      const result = await ordersCollection
+        .find({ email: email })
+        .toArray();
+
+      res.send(result);
+    });
+
 
 
 
