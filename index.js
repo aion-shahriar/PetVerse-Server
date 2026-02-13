@@ -50,6 +50,17 @@ async function run() {
       res.send(result);
     });
 
+    // GET latest 6 listings
+    app.get('/latest-listings', async (req, res) => {
+      const result = await listingsCollection
+        .find()
+        .sort({ createdAt: -1 })
+        .limit(6)
+        .toArray();
+
+      res.send(result);
+    });
+
 
 
 
