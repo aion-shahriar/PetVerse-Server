@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+
 const cors = require('cors');
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 // Middleware to enable CORS
 app.use(cors());
+app.use(express.json());
 
 // Define the port the server will listen on
 const PORT = 3000;
@@ -83,18 +85,7 @@ async function run() {
       res.send(result);
     });
 
-    // SEARCH by name
-    app.get('/search', async (req, res) => {
-      const searchText = req.query.text;
-
-      const result = await listingsCollection
-        .find({
-          name: { $regex: searchText, $options: "i" }
-        })
-        .toArray();
-
-      res.send(result);
-    });
+    
 
     // ADD listing
     app.post('/listings', async (req, res) => {
