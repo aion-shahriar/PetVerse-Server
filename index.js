@@ -96,6 +96,41 @@ async function run() {
       res.send(result);
     });
 
+    // ADD listing
+    app.post('/listings', async (req, res) => {
+      const data = req.body;
+      data.createdAt = new Date();
+      data.downloads = 0;
+
+      const result = await listingsCollection.insertOne(data);
+      res.send(result);
+    });
+
+    // UPDATE listing
+    app.put('/listings/:id', async (req, res) => {
+      const { id } = req.params;
+      const data = req.body;
+
+      const result = await listingsCollection.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: data }
+      );
+
+      res.send(result);
+    });
+
+    // DELETE listing
+    app.delete('/listings/:id', async (req, res) => {
+      const { id } = req.params;
+
+      const result = await listingsCollection.deleteOne({
+        _id: new ObjectId(id)
+      });
+
+      res.send(result);
+    });
+
+
 
 
 
