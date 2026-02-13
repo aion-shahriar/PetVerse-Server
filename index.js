@@ -61,6 +61,18 @@ async function run() {
       res.send(result);
     });
 
+    // GET listings by category
+    app.get('/category/:categoryName', async (req, res) => {
+      const { categoryName } = req.params;
+
+      const result = await listingsCollection
+        .find({ category: categoryName })
+        .toArray();
+
+      res.send(result);
+    });
+
+
 
 
 
