@@ -174,9 +174,9 @@ run().catch(console.dir);
 
 
 // Basic route: When a user visits the root URL (/)
-app.get('/', (req, res) => {
-  res.send('Hello, World! Your Express server is running.');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello, World! Your Express server is running.');
+// });
 
 // Start the server
 app.listen(PORT, () => {
